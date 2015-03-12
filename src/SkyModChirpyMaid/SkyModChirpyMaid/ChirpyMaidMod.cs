@@ -39,12 +39,9 @@ namespace SkyMod.ChirpyMaid
 
     public class ChirpyMaidLoader : LoadingExtensionBase
     {
-        private ChirpPanel chirpPanel;
-
         public override void OnLevelLoaded(LoadMode mode)
         {
-            this.chirpPanel = GameObject.FindObjectOfType<ChirpPanel>();
-            if (this.chirpPanel == null) return;
+            if (ChirpPanel.instance == null) return;
 
             // The following was shamelessly ripped from:
             // http://www.reddit.com/r/CitiesSkylinesModding/comments/2ymwxe/example_code_using_the_colossal_ui_in_a_user_mod/
@@ -76,7 +73,6 @@ namespace SkyMod.ChirpyMaid
             button.hoveredTextColor = new Color32(7, 132, 255, 255);
             button.focusedTextColor = new Color32(255, 255, 255, 255);
             button.pressedTextColor = new Color32(30, 30, 44, 255);
-            
 
             // Place the button.
             button.transformPosition = new Vector3(-1.65f, 0.97f);
@@ -89,10 +85,10 @@ namespace SkyMod.ChirpyMaid
 
         private void ButtonClick(UIComponent component, UIMouseEventParameter eventParam)
         {
-            if (this.chirpPanel != null)
+            if (eventParam.buttons == UIMouseButton.Left && ChirpPanel.instance != null)
             {
-                this.chirpPanel.ClearMessages();
-                this.chirpPanel.Hide();
+                ChirpPanel.instance.ClearMessages();
+                ChirpPanel.instance.Hide();
             }
         }
     }
