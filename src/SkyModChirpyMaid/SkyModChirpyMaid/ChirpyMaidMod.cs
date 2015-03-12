@@ -12,6 +12,33 @@ namespace SkyMod.ChirpyMaid
 
     public class ChirpyMaidMod : IUserMod
     {
+        private static UIButton buttonInstance;
+        private static ChirpPanel panelInstance;
+
+        public static UIButton ButtonInstance
+        {
+            get
+            {
+                return buttonInstance;
+            }
+            set
+            {
+                buttonInstance = value;
+            }
+        }
+
+        public static ChirpPanel PanelInstance
+        {
+            get
+            {
+                return panelInstance;
+            }
+            set
+            {
+                panelInstance = value;
+            }
+        }
+
         public string Name
         {
             get { return "SkyMod Chirpy Maid"; }
@@ -32,11 +59,13 @@ namespace SkyMod.ChirpyMaid
             this.chirpPanel = GameObject.FindObjectOfType<ChirpPanel>();
             if (this.chirpPanel == null) return;
 
+            ChirpyMaidMod.PanelInstance = this.chirpPanel;
+
             // The following was shamelessly ripped from:
             // http://www.reddit.com/r/CitiesSkylinesModding/comments/2ymwxe/example_code_using_the_colossal_ui_in_a_user_mod/
             // https://gist.github.com/reima/9ba51c69f65ae2da7909
 
-            var buttonObject = new GameObject("MyButton", typeof(UIButton));
+            var buttonObject = new GameObject("SkyModChirpyMaidButton", typeof(UIButton));
 
             // Make the buttonObject a child of the uiView.
             buttonObject.transform.parent = this.chirpPanel.transform;
@@ -68,6 +97,8 @@ namespace SkyMod.ChirpyMaid
 
             // Respond to button click.
             button.eventClick += ButtonClick;
+
+            ChirpyMaidMod.ButtonInstance = button;
         }
 
         private void ButtonClick(UIComponent component, UIMouseEventParameter eventParam)
@@ -77,6 +108,33 @@ namespace SkyMod.ChirpyMaid
                 this.chirpPanel.ClearMessages();
                 this.chirpPanel.Hide();
             }
+        }
+    }
+
+    public class ChirpyMaidButtonMonitor : ThreadingExtensionBase
+    {
+        public override void OnUpdate(float realTimeDelta, float simulationTimeDelta)
+        {
+            try
+            {
+                if (ChirpyMaidMod.PanelInstance != null && ChirpyMaidMod.ButtonInstance != null)
+                {
+                    if (ChirpyMaidMod.ButtonInstance.isVisible && !ChirpyMaidMod.PanelInstance.isShowing)
+                    {
+                        ChirpyMaidMod.ButtonInstance.Hide();
+                    }
+                    else if (!ChirpyMaidMod.ButtonInstance.isVisible && ChirpyMaidMod.PanelInstance.isShowing)
+                    {
+                        ChirpyMaidMod.ButtonInstance.Show();
+                    }
+                }
+            }
+            catch
+            {
+                // Gulp.
+            }
+
+            base.OnUpdate(realTimeDelta, simulationTimeDelta);
         }
     }
 }
