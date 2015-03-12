@@ -13,7 +13,6 @@ namespace SkyMod.ChirpyMaid
     public class ChirpyMaidMod : IUserMod
     {
         private static UIButton buttonInstance;
-        private static ChirpPanel panelInstance;
 
         public static UIButton ButtonInstance
         {
@@ -24,18 +23,6 @@ namespace SkyMod.ChirpyMaid
             set
             {
                 buttonInstance = value;
-            }
-        }
-
-        public static ChirpPanel PanelInstance
-        {
-            get
-            {
-                return panelInstance;
-            }
-            set
-            {
-                panelInstance = value;
             }
         }
 
@@ -91,6 +78,7 @@ namespace SkyMod.ChirpyMaid
             button.hoveredTextColor = new Color32(7, 132, 255, 255);
             button.focusedTextColor = new Color32(255, 255, 255, 255);
             button.pressedTextColor = new Color32(30, 30, 44, 255);
+            
 
             // Place the button.
             button.transformPosition = new Vector3(-1.65f, 0.97f);
@@ -117,13 +105,13 @@ namespace SkyMod.ChirpyMaid
         {
             try
             {
-                if (ChirpyMaidMod.PanelInstance != null && ChirpyMaidMod.ButtonInstance != null)
+                if (ChirpPanel.instance != null && ChirpyMaidMod.ButtonInstance != null)
                 {
-                    if (ChirpyMaidMod.ButtonInstance.isVisible && !ChirpyMaidMod.PanelInstance.isShowing)
+                    if (ChirpyMaidMod.ButtonInstance.isVisible && !ChirpPanel.instance.isShowing)
                     {
                         ChirpyMaidMod.ButtonInstance.Hide();
                     }
-                    else if (!ChirpyMaidMod.ButtonInstance.isVisible && ChirpyMaidMod.PanelInstance.isShowing)
+                    else if (!ChirpyMaidMod.ButtonInstance.isVisible && ChirpPanel.instance.isShowing)
                     {
                         ChirpyMaidMod.ButtonInstance.Show();
                     }
