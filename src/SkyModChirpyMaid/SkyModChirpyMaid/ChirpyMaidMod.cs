@@ -50,7 +50,7 @@ namespace SkyMod.ChirpyMaid
             var buttonObject = new GameObject("SkyModChirpyMaidButton", typeof(UIButton));
 
             // Make the buttonObject a child of the uiView.
-            buttonObject.transform.parent = this.chirpPanel.transform;
+            buttonObject.transform.parent = ChirpPanel.instance.transform;
 
             // Get the button component.
             var button = buttonObject.GetComponent<UIButton>();
