@@ -75,6 +75,7 @@ namespace SkyMod.ChirpyMaid
             if (this.chirpPanel != null)
             {
                 this.chirpPanel.ClearMessages();
+                this.chirpPanel.Hide();
             }
         }
     }
