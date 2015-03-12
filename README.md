@@ -6,8 +6,8 @@ A simple Cities: Skylines mod that adds a "Clear Everything" button to the Chirp
 
 1. Clone the source.
 2. Open in Visual Studio (tested on 2013).
-3. Fix the references to `ICities`, `UnityEngine`, `Assembly-CSharp`, and `ColossalManaged`
-  1. These are found in `steamapps\common\Cities_Skylines\Cities_Data\Managed`
+3. Add the game assembly path to the project reference paths.
+  1. The path is `[SteamLibrary]\steamapps\common\Cities_Skylines\Cities_Data\Managed`, where `[SteamLibrary]` is your Steam library folder.
 4. Build.
 
 ## What if I just want the mod to install it?
