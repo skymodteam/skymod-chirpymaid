@@ -46,8 +46,6 @@ namespace SkyMod.ChirpyMaid
             this.chirpPanel = GameObject.FindObjectOfType<ChirpPanel>();
             if (this.chirpPanel == null) return;
 
-            ChirpyMaidMod.PanelInstance = this.chirpPanel;
-
             // The following was shamelessly ripped from:
             // http://www.reddit.com/r/CitiesSkylinesModding/comments/2ymwxe/example_code_using_the_colossal_ui_in_a_user_mod/
             // https://gist.github.com/reima/9ba51c69f65ae2da7909
