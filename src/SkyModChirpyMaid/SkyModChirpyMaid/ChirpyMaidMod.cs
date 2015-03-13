@@ -63,6 +63,9 @@ namespace SkyMod.ChirpyMaid
             button.focusedTextColor = new Color32(255, 255, 255, 255);
             button.pressedTextColor = new Color32(30, 30, 44, 255);
 
+            // Enable sounds.
+            button.playAudioEvents = true;
+
             // Place the button.
             button.transformPosition = new Vector3(-1.65f, 0.97f);
 
